@@ -19,7 +19,17 @@ const addMember = async (req, res, next) => {
   }
 }
 
+const deleteMember = async (req, res, next) => {
+  try {
+    const data = await orgService.deleteMember(req);
+    ApiResponse.ok(res, "Member get deleted", data);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export {
     createOrganisation,
-    addMember
+    addMember,
+    deleteMember
 }

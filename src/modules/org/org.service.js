@@ -51,7 +51,35 @@ const addMember = async (req) => {
     return orgDetails;
 }
 
+const deleteMember = async (req) => {
+    const deleteUser = req.body.username;
+
+    const deleteUserId = await userModel.findOne({
+        username: deleteUser
+    })
+
+    if(!deleteUserId){
+        throw ApiError.notFound("user not exist")
+    }
+
+    const orgDetails = await orgModel.findOne({
+        admin: req.userId
+    })
+
+    if(!orgDetails){
+        throw ApiError.notFound("org not exits")
+    }
+
+    orgDetails.member = orgDetails?.member.filter(e => e.toString() !== deleteUserId._id.toString());
+
+    await orgDetails.save();
+
+    return orgDetails;
+}
+
+
 export {
     createOrganisation,
-    addMember
+    addMember,
+    deleteMember
 }

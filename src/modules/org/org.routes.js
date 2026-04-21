@@ -5,6 +5,7 @@ import authMiddleware from "../auth/auth.middleware.js";
 const router = Router();
 
 router.post("/create-organisation", authMiddleware, controller.createOrganisation);
-router.post("/add-member", authMiddleware, controller.addMember)
+router.post("/add-member", authMiddleware, controller.addMember);
+router.delete("/delete-member", authMiddleware, controller.deleteMember);
 
 export default router;
