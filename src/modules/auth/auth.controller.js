@@ -11,4 +11,13 @@ const signup = async (req, res, next) => {
   }
 };
 
-export { signup };
+const signin = async (req, res, next) => {
+  try {
+    const token = await authService.signin(req.body);
+    ApiResponse.ok(res, "Signin successfully", token);
+  } catch (error){
+    next(error);
+  }
+}
+
+export { signup, signin };
