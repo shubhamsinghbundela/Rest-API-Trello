@@ -38,6 +38,45 @@ const createTask = async (req) => {
     return newTask;
 }
 
+const updateTask = async (req) => {
+    const { taskId, status } = req.body;
+    const allowedStatus = ["Todo", "In Progress", "Done"];
+    if (!allowedStatus.includes(status)) {
+        throw ApiError.badRequest("Invalid status")
+    }
+
+    const task = await taskModel.findOne({
+        _id: taskId,
+        userId: req.userId
+    });
+
+    if (!task) {
+        throw ApiError.notFound("Task not found")
+    }
+
+    task.status = status;
+    await task.save();
+
+    return task;
+}
+
+const deleteTask = async (req) => {
+    const { taskId } = req.body;
+
+    const task = await taskModel.findOne({
+        _id: taskId,
+        userId: req.userId
+    });
+
+    if (!task) {
+        throw ApiError.notFound("Task not found")
+    }
+
+    await taskModel.deleteOne({ _id: taskId });
+}
+
 export {
-    createTask
+    createTask,
+    updateTask,
+    deleteTask
 }

@@ -9,6 +9,27 @@ const createTask = async (req, res, next) => {
         next(error);
     }
 }
+
+const updateTask = async (req, res, next) => {
+    try{
+        const data = await taskService.updateTask(req);
+        ApiResponse.ok(res, "Task updated successfully", data)
+    }catch (error) {
+        next(error);
+    }
+}
+
+const deleteTask = async (req, res, next) => {
+    try{
+        const data = await taskService.deleteTask(req);
+        ApiResponse.ok(res, "Task deleted successfully", data)
+    }catch(error) {
+        next(error)
+    }
+}
+
 export {
-    createTask
+    createTask,
+    updateTask,
+    deleteTask
 }
