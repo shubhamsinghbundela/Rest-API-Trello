@@ -162,15 +162,6 @@ Contributions are welcome!
 
 ---
 
-## 📌 Future Improvements
-
-* Role-based access control (RBAC)
-* Task comments & attachments
-* Activity logs
-* Real-time updates (WebSockets)
-
----
-
 ## ⭐ Support
 
 If you like this project, consider giving it a ⭐ on GitHub!
