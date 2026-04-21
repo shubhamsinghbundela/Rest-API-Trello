@@ -10,6 +10,16 @@ const createOrganisation = async (req, res, next) => {
   }
 };
 
+const addMember = async (req, res, next) => {
+  try {
+    const data = await orgService.addMember(req);
+    ApiResponse.ok(res, "Member get added", data);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export {
-    createOrganisation
+    createOrganisation,
+    addMember
 }
